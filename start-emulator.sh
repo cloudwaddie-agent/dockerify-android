@@ -24,7 +24,7 @@ update_config() {
   fi
 }
 
-# Configure optional screen resolution and density directly via config.ini
+# Configure optional screen resolution, density, and storage size directly via config.ini
 if [ -f "$CONFIG_FILE" ]; then
   if [ -n "$SCREEN_RESOLUTION" ]; then
     WIDTH=${SCREEN_RESOLUTION%x*}
@@ -34,6 +34,9 @@ if [ -f "$CONFIG_FILE" ]; then
   fi
   if [ -n "$SCREEN_DENSITY" ]; then
     update_config "hw.lcd.density" "$SCREEN_DENSITY"
+  fi
+  if [ -n "$DATA_PARTITION_SIZE" ]; then
+    update_config "hw.dataPartition.size" "$DATA_PARTITION_SIZE"
   fi
 fi
 
