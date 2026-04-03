@@ -148,6 +148,7 @@ scrcpy -s localhost:5555
 | `ANDROID_VERSION` | Android API version to emulate (30 = Android 11, 31 = Android 12, 33 = Android 13, 34 = Android 14, 35 = Android 15, 36 = Android 16). Also enables multi-version support. | `30` |
 | `GAPPS_VERSION` | GAPPS version to download. Default behavior derives from ANDROID_VERSION. | `11` |
 | `DATA_PARTITION_SIZE` | Data partition size for internal storage (e.g., `4G`, `8G`, `16G`). Default is 4G. | `4G` |
+| `PORT_FORWARD` | Port forwarding from host to Android. Format: `HOST_PORT:ANDROID_PORT` (comma separated for multiple). | - |
 
 
 ## 🔄 **First Boot Process**

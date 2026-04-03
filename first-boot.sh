@@ -121,6 +121,16 @@ copy_extras() {
 LOCAL_IP=$(ip addr list eth0 | grep "inet " | cut -d' ' -f6 | cut -d/ -f1)
 socat tcp-listen:"5555",bind="$LOCAL_IP",fork tcp:127.0.0.1:"5555" &
 
+if [ -n "$PORT_FORWARD" ]; then
+  for port_pair in $(echo "$PORT_FORWARD" | tr ',' ' '); do
+    HOST_PORT=$(echo "$port_pair" | cut -d: -f1)
+    ANDROID_PORT=$(echo "$port_pair" | cut -d: -f2)
+    if [ -n "$HOST_PORT" ] && [ -n "$ANDROID_PORT" ]; then
+      socat tcp-listen:"$HOST_PORT",bind="$LOCAL_IP",fork tcp:127.0.0.1:"$ANDROID_PORT" &
+    fi
+  done
+fi
+
 gapps_needed=false
 root_needed=false
 if bool_true "$GAPPS_SETUP" && [ ! -f /data/.gapps-done ]; then gapps_needed=true; fi
