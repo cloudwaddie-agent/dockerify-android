@@ -145,7 +145,7 @@ scrcpy -s localhost:5555
 | `SCREEN_DENSITY` | Screen pixel density in DPI | device default |
 | `ROOT_SETUP` | Set to `1` to enable rooting and Magisk. Can be turned on after the first start but cannot be undone without recreating the data volume. | `0` |
 | `GAPPS_SETUP` | Set to `1` to install PICO GAPPS. Can be turned on after the first start but cannot be undone without recreating the data volume. | `0` |
-| `ANDROID_VERSION` | Android API version to emulate (30 = Android 11, 31 = Android 12, 33 = Android 13, 34 = Android 14). Also enables multi-version support. | `30` |
+| `ANDROID_VERSION` | Android API version to emulate (30 = Android 11, 31 = Android 12, 33 = Android 13, 34 = Android 14, 35 = Android 15, 36 = Android 16). Also enables multi-version support. | `30` |
 | `GAPPS_VERSION` | GAPPS version to download. Default behavior derives from ANDROID_VERSION. | `11` |
 
 
