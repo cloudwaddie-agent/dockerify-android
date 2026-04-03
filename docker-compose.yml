@@ -20,6 +20,8 @@ services:
       #SCREEN_RESOLUTION: 720x720
       # Optional screen density (dpi)
       #SCREEN_DENSITY: 227
+      # Data partition size (e.g., 4G, 8G, 16G)
+      #DATA_PARTITION_SIZE: 4G
       ROOT_SETUP: 0 # set to 1 to enable rooting
       GAPPS_SETUP: 0 # set to 1 to install PICO GAPPS
     privileged: true
