@@ -21,14 +21,12 @@ RUN apt-get update && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
-# Download emulator directly as fallback (sdkmanager doesn't always provide it)
-RUN mkdir -p /opt/android-sdk && \
-    cd /opt/android-sdk && \
-    wget -q "https://dl.google.com/android/repository/emulator-linux_x64-11076708_latest.zip" -O emulator.zip || true && \
-    if [ -f emulator.zip ]; then \
-        unzip -q emulator.zip && rm emulator.zip; \
-    else \
-        echo "Warning: Failed to download emulator, will install via sdkmanager"; \
+RUN curl -s "https://dl.google.com/android/repository/repository2-1.xml" | \
+    grep -oP 'emulator-linux_x64-\d+\.zip' | head -1 | \
+    awk '{print "https://dl.google.com/android/repository/" $0}' | \
+    wget -q -O /tmp/emulator.zip - || true && \
+    if [ -s /tmp/emulator.zip ] && [ -f /tmp/emulator.zip ]; then \
+        unzip -q /tmp/emulator.zip -d /opt/android-sdk && rm /tmp/emulator.zip; \
     fi
 
 # Set up Android SDK
