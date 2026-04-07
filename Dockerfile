@@ -48,7 +48,8 @@ RUN mkdir /root/.android/ && \
 # Detect architecture and set environment variable
 RUN export ANDROID_VERSION=$ANDROID_VERSION && \
     if [ "$ANDROID_VERSION" -ge 35 ]; then \
-        yes | sdkmanager --sdk_root=$ANDROID_HOME "emulator" "platform-tools" "platforms;android-${ANDROID_VERSION}" "system-images;android-${ANDROID_VERSION};google_apis;x86_64"; \
+        yes | sdkmanager --sdk_root=$ANDROID_HOME "platform-tools" "platforms;android-${ANDROID_VERSION}" "system-images;android-${ANDROID_VERSION};google_apis;x86_64" || true; \
+        yes | sdkmanager --sdk_root=$ANDROID_HOME "emulator" || true; \
     else \
         yes | sdkmanager --sdk_root=$ANDROID_HOME "emulator" "platform-tools" "platforms;android-${ANDROID_VERSION}" "system-images;android-${ANDROID_VERSION};default;x86_64"; \
     fi
