@@ -49,10 +49,10 @@ RUN mkdir /root/.android/ && \
 RUN export ANDROID_VERSION=$ANDROID_VERSION && \
     if [ "$ANDROID_VERSION" -ge 35 ]; then \
         yes | sdkmanager --sdk_root=$ANDROID_HOME "platform-tools" "platforms;android-${ANDROID_VERSION}" "system-images;android-${ANDROID_VERSION};google_apis;x86_64" || true; \
-        yes | sdkmanager --sdk_root=$ANDROID_HOME "emulator" || true; \
     else \
         yes | sdkmanager --sdk_root=$ANDROID_HOME "emulator" "platform-tools" "platforms;android-${ANDROID_VERSION}" "system-images;android-${ANDROID_VERSION};default;x86_64"; \
-    fi
+    fi && \
+    yes | sdkmanager --sdk_root=$ANDROID_HOME "emulator" || true
 # remove /opt/android-sdk/emulator/crashpad_handler
 RUN rm -f /opt/android-sdk/emulator/crashpad_handler
 # RUN if [ "$(uname -m)" = "aarch64" ]; then \
