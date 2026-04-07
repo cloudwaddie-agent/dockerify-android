@@ -46,7 +46,12 @@ RUN mkdir /root/.android/ && \
 
 
 # Detect architecture and set environment variable
-RUN yes | sdkmanager --sdk_root=$ANDROID_HOME "emulator" "platform-tools" "platforms;android-${ANDROID_VERSION}" "system-images;android-${ANDROID_VERSION};default;x86_64"
+RUN export ANDROID_VERSION=$ANDROID_VERSION && \
+    if [ "$ANDROID_VERSION" -ge 35 ]; then \
+        yes | sdkmanager --sdk_root=$ANDROID_HOME "emulator" "platform-tools" "platforms;android-${ANDROID_VERSION}" "system-images;android-${ANDROID_VERSION};google_apis;x86_64"; \
+    else \
+        yes | sdkmanager --sdk_root=$ANDROID_HOME "emulator" "platform-tools" "platforms;android-${ANDROID_VERSION}" "system-images;android-${ANDROID_VERSION};default;x86_64"; \
+    fi
 # remove /opt/android-sdk/emulator/crashpad_handler
 RUN rm -f /opt/android-sdk/emulator/crashpad_handler
 # RUN if [ "$(uname -m)" = "aarch64" ]; then \
