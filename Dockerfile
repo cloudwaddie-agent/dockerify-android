@@ -16,9 +16,20 @@ RUN apt-get update && \
         qemu-kvm \
         iproute2 \
         socat \
-        tzdata && \
+        tzdata \
+        squashfs-tools && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
+
+# Download emulator directly as fallback (sdkmanager doesn't always provide it)
+RUN mkdir -p /opt/android-sdk && \
+    cd /opt/android-sdk && \
+    wget -q "https://dl.google.com/android/repository/emulator-linux_x64-11076708_latest.zip" -O emulator.zip || true && \
+    if [ -f emulator.zip ]; then \
+        unzip -q emulator.zip && rm emulator.zip; \
+    else \
+        echo "Warning: Failed to download emulator, will install via sdkmanager"; \
+    fi
 
 # Set up Android SDK
 RUN mkdir -p /opt/android-sdk/cmdline-tools && \
