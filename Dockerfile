@@ -39,7 +39,7 @@ RUN mkdir -p /opt/android-sdk/cmdline-tools && \
 
 ENV ANDROID_HOME=/opt/android-sdk
 ENV ANDROID_AVD_HOME=/data
-ENV PATH="$ANDROID_HOME/cmdline-tools/latest/bin:$ANDROID_HOME/platform-tools:$PATH"
+ENV PATH="$ANDROID_HOME/cmdline-tools/latest/bin:$PATH:$ANDROID_HOME/platform-tools"
 
 RUN mkdir /root/.android/ && \
  	touch /root/.android/repositories.cfg && \
@@ -73,7 +73,7 @@ RUN chmod +x /root/start-emulator.sh
 
 EXPOSE 5554 5555
 
-HEALTHCHECK --interval=10s --timeout=10s --retries=600 \
-  CMD adb devices | grep emulator-5554 && test -f /data/.first-boot-done || exit 1
+HEALTHCHECK --interval=30s --timeout=10s --retries=60 \
+  CMD ps aux | grep -v grep | grep -q emulator || test -f /data/.first-boot-done
 
 CMD ["/usr/bin/supervisord", "-c", "/etc/supervisor/conf.d/supervisord.conf"]
