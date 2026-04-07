@@ -16,7 +16,8 @@ RUN apt-get update && \
         iproute2 \
         socat \
         tzdata \
-        squashfs-tools && \
+        squashfs-tools \
+        adb && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
