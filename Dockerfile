@@ -9,15 +9,14 @@ RUN apt-get update && \
         wget \
         curl \
         git \
-        lzip \
+        xz-utils \
         unzip \
-        supervisor \
+        python3-supervisor \
         qemu-kvm \
         iproute2 \
         socat \
         tzdata \
         squashfs-tools \
-        adb \
         procps && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
