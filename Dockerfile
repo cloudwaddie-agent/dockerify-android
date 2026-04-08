@@ -11,7 +11,7 @@ RUN apt-get update && \
         git \
         xz-utils \
         unzip \
-        python3-supervisor \
+        supervisor \
         qemu-kvm \
         iproute2 \
         socat \
