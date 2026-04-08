@@ -17,7 +17,8 @@ RUN apt-get update && \
         socat \
         tzdata \
         squashfs-tools \
-        adb && \
+        adb \
+        procps && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 

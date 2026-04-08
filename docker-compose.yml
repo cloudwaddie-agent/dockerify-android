@@ -25,6 +25,12 @@ services:
     privileged: true
     devices:
       - /dev/kvm
+    healthcheck:
+      test: ["CMD", "ps", "aux"]
+      interval: 30s
+      timeout: 10s
+      retries: 60
+      start_period: 60s
 
   scrcpy-web:
     container_name: scrcpy-web
